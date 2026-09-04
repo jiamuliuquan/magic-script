@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.1.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
-    <modelVersion>4.1.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.ssssssss</groupId>
+    <groupId>app.foxlab</groupId>
     <artifactId>magic-script</artifactId>
     <version>2.0.0</version>
     <packaging>jar</packaging>
 
     <name>magic-script</name>
     <description>magic script</description>
-    <url>https://gitee.com/ssssssss-team/magic-script</url>
+    <url>https://code.foxlab.app/foxlab/magic-script</url>
     <inceptionYear>2020</inceptionYear>
 
     <licenses>
         <license>
             <name>The MIT License (MIT)</name>
-            <url>https://gitee.com/ssssssss-team/magic-script/blob/master/LICENSE</url>
+            <url>https://code.foxlab.app/foxlab/magic-script/blob/master/LICENSE</url>
         </license>
     </licenses>
 
@@ -32,9 +32,9 @@
         </developer>
     </developers>
     <scm>
-        <url>https://gitee.com/ssssssss-team/magic-script</url>
-        <connection>scm:git:https://gitee.com/ssssssss-team/magic-script.git</connection>
-        <developerConnection>scm:git:https://gitee.com/ssssssss-team/magic-script.git</developerConnection>
+        <url>https://code.foxlab.app/foxlab/magic-script</url>
+        <connection>scm:git:https://code.foxlab.app/foxlab/magic-script.git</connection>
+        <developerConnection>scm:git:https://code.foxlab.app/foxlab/magic-script.git</developerConnection>
     </scm>
 
     <properties>
@@ -50,6 +50,37 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- GPG 签名：发布到 Central 必须 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 上传发布到 Central Portal (central.sonatype.com) -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <profiles>
         <profile>
             <id>release</id>
@@ -59,7 +90,7 @@
                     <plugin>
                         <artifactId>maven-compiler-plugin</artifactId>
                         <configuration>
-                            <release>1.8</release>
+                            <release>21</release>
                             <encoding>UTF-8</encoding>
                         </configuration>
                     </plugin>
@@ -67,6 +98,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
+                        <version>3.4.0</version>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -80,6 +112,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.12.0</version>
                         <configuration>
                             <additionalOptions>
                                 <additionalOption>-Xdoclint:none</additionalOption>
